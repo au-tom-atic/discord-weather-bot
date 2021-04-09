@@ -1,0 +1,26 @@
+{
+  "name": "weather-bot",
+  "version": "1.0.0",
+  "description": "weather bot for discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/au-tom-atic/discord-weather-bot.git"
+  },
+  "author": "Tom Leavy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/au-tom-atic/discord-weather-bot/issues"
+  },
+  "homepage": "https://github.com/au-tom-atic/discord-weather-bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
