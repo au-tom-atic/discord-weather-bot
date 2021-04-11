@@ -23,7 +23,7 @@ client.once("ready", () => {
     console.log("ready for commands with prefix " + prefix);
 });
 
-client.on("message", (message) => {
+client.on("message", async (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -73,7 +73,7 @@ client.on("message", (message) => {
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
     try {
-        command.execute(message, args);
+       command.execute(message, args);
     } catch (error) {
         console.error(error);
         message.reply("there was an error trying to execute that command!");
