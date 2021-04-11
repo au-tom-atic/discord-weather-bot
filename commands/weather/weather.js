@@ -14,7 +14,6 @@ module.exports = {
         let coords;
         try {
             coords = await geocoder.getCoords(args.join(" "));
-            console.log(coords);
         } catch (error) {
             console.log(error);
         }
@@ -27,6 +26,8 @@ module.exports = {
             const weatherEmbeddedResponse = new Discord.MessageEmbed()
                 .setColor("#0099ff")
                 .setTitle(`Current Weather`)
+                .setAuthor('Tom L', 'https://static.thenounproject.com/png/967229-200.png', 'https://github.com/au-tom-atic/discord-weather-bot')
+                .setURL('https://openweathermap.org')
                 .setDescription(`Description for ${response.data.name}`)
                 .setThumbnail(
                     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -53,8 +54,12 @@ module.exports = {
                     }
                 )
                 .setTimestamp()
-                .setFooter("crazy weather we are having lately, right?");
+                .setFooter("weather data provided by openweathermap");
             message.channel.send(weatherEmbeddedResponse);
+        }
+        else
+        {
+            message.channel.send('Sorry, something went wrong.');
         }
     },
 };
