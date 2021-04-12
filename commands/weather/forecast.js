@@ -19,7 +19,8 @@ module.exports = {
         const response = await axios.get(url);
 
         if (response) {
-            let weatherEmbeddedResponse = new Discord.MessageEmbed()
+            for (const [index, day] of response.data.daily.entries()) {
+                let weatherEmbeddedResponse = new Discord.MessageEmbed()
                 .setColor("#0099ff")
                 .setTitle(`Weather Forecast`)
                 .setAuthor(
@@ -35,7 +36,6 @@ module.exports = {
                 .setTimestamp()
                 .setFooter("weather data provided by openweathermap");
 
-            for (const [index, day] of response.data.daily.entries()) {
                 if (index === 0)
                     weatherEmbeddedResponse.setThumbnail(
                         `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`
@@ -99,9 +99,8 @@ module.exports = {
                     }
 
                 );
-            }
-
-            message.channel.send(weatherEmbeddedResponse);
+                message.channel.send(weatherEmbeddedResponse);
+            }          
         } else {
             message.channel.send("Sorry, something went wrong.");
         }
