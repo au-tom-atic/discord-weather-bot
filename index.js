@@ -9,14 +9,16 @@ client.cooldowns = new Discord.Collection();
 
 dotenv.config();
 
-const commandFolders = fs.readdirSync('./commands');
+const commandFolders = fs.readdirSync("./commands");
 
 for (const folder of commandFolders) {
-	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
-	for (const file of commandFiles) {
-		const command = require(`./commands/${folder}/${file}`);
-		client.commands.set(command.name, command);
-	}
+    const commandFiles = fs
+        .readdirSync(`./commands/${folder}`)
+        .filter((file) => file.endsWith(".js"));
+    for (const file of commandFiles) {
+        const command = require(`./commands/${folder}/${file}`);
+        client.commands.set(command.name, command);
+    }
 }
 
 client.once("ready", () => {
@@ -73,7 +75,7 @@ client.on("message", async (message) => {
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
     try {
-       command.execute(message, args);
+        command.execute(message, args);
     } catch (error) {
         console.error(error);
         message.reply("there was an error trying to execute that command!");

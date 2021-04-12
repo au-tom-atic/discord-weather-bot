@@ -29,17 +29,21 @@ module.exports = {
             const weatherEmbeddedResponse = new Discord.MessageEmbed()
                 .setColor("#0099ff")
                 .setTitle(`Current Weather`)
-                .setAuthor('Tom L', 'https://static.thenounproject.com/png/967229-200.png', 'https://github.com/au-tom-atic/discord-weather-bot')
-                .setURL('https://openweathermap.org')
+                .setAuthor(
+                    "Tom L",
+                    "https://static.thenounproject.com/png/967229-200.png",
+                    "https://github.com/au-tom-atic/discord-weather-bot"
+                )
+                .setURL("https://openweathermap.org")
                 .setDescription(`Description for ${args.join(" ")}`)
                 .setThumbnail(
                     `http://openweathermap.org/img/wn/${response.data.daily[0].weather[0].icon}@2x.png`
                 )
-                .addFields(     
+                .addFields(
                     {
                         name: "---Daily Forecast---",
                         value: `${response.data.daily[0].weather[0].description}`,
-                    }, 
+                    },
                     {
                         name: "Chance of Rain",
                         value: `${response.data.daily[0].pop}%`,
@@ -52,7 +56,9 @@ module.exports = {
                     },
                     {
                         name: "Wind",
-                        value: `${Compass.cardinalFromDegree(response.data.daily[0].wind_deg)}@${response.data.daily[0].wind_speed}mph`,
+                        value: `${Compass.cardinalFromDegree(
+                            response.data.daily[0].wind_deg
+                        )}@${response.data.daily[0].wind_speed}mph`,
                         inline: true,
                     },
                     {
@@ -87,8 +93,11 @@ module.exports = {
                     },
                     {
                         name: "---Current---",
-                        value: `Local time: ${forecastDate.toLocaleString('en-US', {timeZone: response.data.timezone})}`,
-                    },             
+                        value: `Local time: ${forecastDate.toLocaleString(
+                            "en-US",
+                            { timeZone: response.data.timezone }
+                        )}`,
+                    },
                     {
                         name: "Temp",
                         value: `${response.data.current.temp}\u00B0F`,
@@ -102,47 +111,49 @@ module.exports = {
                     {
                         name: "Description",
                         value: `${response.data.current.weather[0].main}, ${response.data.current.weather[0].description}`,
-                        inline: true
+                        inline: true,
                     },
                     {
                         name: "Visibility",
                         value: `${response.data.current.visibility} ft`,
-                        inline: true
+                        inline: true,
                     },
                     {
                         name: "Wind",
-                        value: `${Compass.cardinalFromDegree(response.data.current.wind_deg)}@${response.data.current.wind_speed}mph`,
-                        inline: true
+                        value: `${Compass.cardinalFromDegree(
+                            response.data.current.wind_deg
+                        )}@${response.data.current.wind_speed}mph`,
+                        inline: true,
                     },
                     {
                         name: "Cloud Coverage",
                         value: `${response.data.current.clouds}%`,
-                        inline: true
+                        inline: true,
                     },
                     {
                         name: "UV Index",
                         value: `${response.data.current.uvi}`,
-                        inline: true
+                        inline: true,
                     },
                     {
                         name: "Humidity",
                         value: `${response.data.current.humidity}%`,
-                        inline: true
+                        inline: true,
                     },
                     {
                         name: "Dew Point",
                         value: `${response.data.current.dew_point}\u00B0F`,
-                        inline: true
-                    },
+                        inline: true,
+                    }
                 )
-                .setImage(`http://openweathermap.org/img/wn/${response.data.current.weather[0].icon}@2x.png`)
+                .setImage(
+                    `http://openweathermap.org/img/wn/${response.data.current.weather[0].icon}@2x.png`
+                )
                 .setTimestamp()
                 .setFooter("weather data provided by openweathermap");
             message.channel.send(weatherEmbeddedResponse);
-        }
-        else
-        {
-            message.channel.send('Sorry, something went wrong.');
+        } else {
+            message.channel.send("Sorry, something went wrong.");
         }
     },
 };

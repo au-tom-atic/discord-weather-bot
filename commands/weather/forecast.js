@@ -8,7 +8,7 @@ dotenv.config();
 module.exports = {
     name: "forecast",
     aliases: ["f"],
-    description: "gives you a 5 day forecast",
+    description: "gives you a 3 day forecast",
     cooldown: 5,
     args: true,
     async execute(message, args) {
@@ -28,7 +28,7 @@ module.exports = {
                     "https://github.com/au-tom-atic/discord-weather-bot"
                 )
                 .setURL("https://openweathermap.org")
-                .setDescription(`5 forcast for ${args.join(" ")}`)
+                .setDescription(`3 forcast for ${args.join(" ")}`)
                 .setThumbnail
                 //`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
                 ()
@@ -40,27 +40,65 @@ module.exports = {
                     weatherEmbeddedResponse.setThumbnail(
                         `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`
                     );
-                if (index === 5) break;
+                if (index === 3) break;
                 let timestamp = day.dt;
                 let forecastDate = new Date(timestamp * 1000);
                 var month = forecastDate.getMonth() + 1;
                 var date = forecastDate.getDate();
                 var year = forecastDate.getFullYear();
 
-                weatherEmbeddedResponse.addFields({
-                    name: `${month}/${date}/${year}`,
-                    value: `Min: ${day.temp.min}\u00B0F | Max: ${
-                        day.temp.max
-                    }\u00B0F | Chance of rain: ${day.pop * 100}%
-                            Humidity: ${day.humidity}% | Dew Point: ${
-                        day.dew_point
-                    }\u00B0F | Wind: ${Compass.cardinalFromDegree(
-                        day.wind_deg
-                    )}@${day.wind_speed}mph   
-                            UV Index: ${day.uvi} | Description: ${
-                        day.weather[0].description
-                    }`,
-                });
+                weatherEmbeddedResponse.addFields(
+                    {
+                        name: `---${month}/${date}/${year}---`,
+                        value: `${day.weather[0].description}`
+                    },
+                    {
+                        name: `Min Temp`,
+                        value: `${day.temp.min}\u00B0F`,
+                        inline: true,
+                    },
+                    {
+                        name: `Max Temp`,
+                        value: `${day.temp.max}\u00B0F`,
+                        inline: true,
+                    },
+                    {
+                        name: 'Chance of rain',
+                        value: `${day.pop}%`,
+                        inline: true
+                    },
+                    {
+                        name: 'Humidity',
+                        value: `${day.humidity}%`,
+                        inline: true
+                    },
+                    {
+                        name: 'Dew Point',
+                        value: `${day.dew_point}\u00B0F`,
+                        inline: true
+                    },
+                    {
+                        name: 'Wind',
+                        value: `${Compass.cardinalFromDegree(day.wind_deg)}@${day.wind_speed}mph`,
+                        inline: true
+                    },
+                    {
+                        name: 'UV Index',
+                        value: `${day.uvi}`,
+                        inline: true
+                    },
+                    {
+                        name: 'Sunrise',
+                        value: `${new Date(day.sunrise* 1000).toLocaleTimeString('en-US', {timeZone: response.data.timezone})}`,
+                        inline: true
+                    },
+                    {
+                        name: 'Sunset',
+                        value: `${new Date(day.sunset* 1000).toLocaleTimeString('en-US', {timeZone: response.data.timezone})}`,
+                        inline: true
+                    }
+
+                );
             }
 
             message.channel.send(weatherEmbeddedResponse);
