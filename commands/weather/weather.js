@@ -2,6 +2,7 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 const Discord = require("discord.js");
 const geocoder = require("../../helpers/geocoding.js");
+const Compass = require("cardinal-direction");
 dotenv.config();
 
 module.exports = {
@@ -19,40 +20,122 @@ module.exports = {
         }
 
         let apiKey = process.env.WEATHER_KEY;
-        let url = `http://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lng}&appid=${apiKey}&units=imperial`;
+        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lng}&appid=${apiKey}&units=imperial&exclude=minutely,hourly,alerts`;
 
         const response = await axios.get(url);
         if (response) {
+            let timestamp = response.data.current.dt;
+            let forecastDate = new Date(timestamp * 1000);
             const weatherEmbeddedResponse = new Discord.MessageEmbed()
                 .setColor("#0099ff")
                 .setTitle(`Current Weather`)
                 .setAuthor('Tom L', 'https://static.thenounproject.com/png/967229-200.png', 'https://github.com/au-tom-atic/discord-weather-bot')
                 .setURL('https://openweathermap.org')
-                .setDescription(`Description for ${response.data.name}`)
+                .setDescription(`Description for ${args.join(" ")}`)
                 .setThumbnail(
-                    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+                    `http://openweathermap.org/img/wn/${response.data.daily[0].weather[0].icon}@2x.png`
                 )
-                .addFields(
+                .addFields(     
                     {
-                        name: "Description",
-                        value: `${response.data.weather[0].main}, ${response.data.weather[0].description}`,
+                        name: "---Daily Forecast---",
+                        value: `${response.data.daily[0].weather[0].description}`,
+                    }, 
+                    {
+                        name: "Chance of Rain",
+                        value: `${response.data.daily[0].pop}%`,
+                        inline: true,
                     },
                     {
-                        name: "Current temp",
-                        value: `${response.data.main.temp}\u00B0F`,
+                        name: "Humidity",
+                        value: `${response.data.daily[0].humidity}%`,
+                        inline: true,
+                    },
+                    {
+                        name: "Wind",
+                        value: `${Compass.cardinalFromDegree(response.data.daily[0].wind_deg)}@${response.data.daily[0].wind_speed}mph`,
+                        inline: true,
+                    },
+                    {
+                        name: "Morning Temp",
+                        value: `${response.data.daily[0].temp.morn}\u00B0F`,
+                        inline: true,
+                    },
+                    {
+                        name: "Day Temp",
+                        value: `${response.data.daily[0].temp.day}\u00B0F`,
+                        inline: true,
+                    },
+                    {
+                        name: "Night Temp",
+                        value: `${response.data.daily[0].temp.night}\u00B0F`,
+                        inline: true,
+                    },
+                    {
+                        name: "Morning Feels Like",
+                        value: `${response.data.daily[0].feels_like.morn}\u00B0F`,
+                        inline: true,
+                    },
+                    {
+                        name: "Day Feels Like",
+                        value: `${response.data.daily[0].feels_like.day}\u00B0F`,
+                        inline: true,
+                    },
+                    {
+                        name: "Night Feels Like",
+                        value: `${response.data.daily[0].feels_like.night}\u00B0F`,
+                        inline: true,
+                    },
+                    {
+                        name: "---Current---",
+                        value: `Local time: ${forecastDate.toLocaleString('en-US', {timeZone: response.data.timezone})}`,
+                    },             
+                    {
+                        name: "Temp",
+                        value: `${response.data.current.temp}\u00B0F`,
                         inline: true,
                     },
                     {
                         name: "Feels Like",
-                        value: `${response.data.main.feels_like}\u00B0F`,
+                        value: `${response.data.current.feels_like}\u00B0F`,
                         inline: true,
                     },
                     {
-                        name: "Min/Max",
-                        value: `${response.data.main.temp_min}\u00B0F/${response.data.main.temp_max}\u00B0F`,
-                        inline: true,
-                    }
+                        name: "Description",
+                        value: `${response.data.current.weather[0].main}, ${response.data.current.weather[0].description}`,
+                        inline: true
+                    },
+                    {
+                        name: "Visibility",
+                        value: `${response.data.current.visibility} ft`,
+                        inline: true
+                    },
+                    {
+                        name: "Wind",
+                        value: `${Compass.cardinalFromDegree(response.data.current.wind_deg)}@${response.data.current.wind_speed}mph`,
+                        inline: true
+                    },
+                    {
+                        name: "Cloud Coverage",
+                        value: `${response.data.current.clouds}%`,
+                        inline: true
+                    },
+                    {
+                        name: "UV Index",
+                        value: `${response.data.current.uvi}`,
+                        inline: true
+                    },
+                    {
+                        name: "Humidity",
+                        value: `${response.data.current.humidity}%`,
+                        inline: true
+                    },
+                    {
+                        name: "Dew Point",
+                        value: `${response.data.current.dew_point}\u00B0F`,
+                        inline: true
+                    },
                 )
+                .setImage(`http://openweathermap.org/img/wn/${response.data.current.weather[0].icon}@2x.png`)
                 .setTimestamp()
                 .setFooter("weather data provided by openweathermap");
             message.channel.send(weatherEmbeddedResponse);

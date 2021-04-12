@@ -22,8 +22,12 @@ module.exports = {
             let weatherEmbeddedResponse = new Discord.MessageEmbed()
                 .setColor("#0099ff")
                 .setTitle(`Weather Forecast`)
-                .setAuthor('Tom L', 'https://static.thenounproject.com/png/967229-200.png', 'https://github.com/au-tom-atic/discord-weather-bot')
-                .setURL('https://openweathermap.org')
+                .setAuthor(
+                    "Tom L",
+                    "https://static.thenounproject.com/png/967229-200.png",
+                    "https://github.com/au-tom-atic/discord-weather-bot"
+                )
+                .setURL("https://openweathermap.org")
                 .setDescription(`5 forcast for ${args.join(" ")}`)
                 .setThumbnail
                 //`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
