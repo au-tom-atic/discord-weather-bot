@@ -45,103 +45,103 @@ module.exports = {
                         value: `${response.data.daily[0].weather[0].description}`,
                     },
                     {
-                        name: "Chance of Rain",
+                        name: "🌧️Chance of Rain",
                         value: `${response.data.daily[0].pop}%`,
                         inline: true,
                     },
                     {
-                        name: "Humidity",
+                        name: "💦Humidity",
                         value: `${response.data.daily[0].humidity}%`,
                         inline: true,
                     },
                     {
-                        name: "Wind",
+                        name: "💨Wind",
                         value: `${Compass.cardinalFromDegree(
                             response.data.daily[0].wind_deg
                         )}@${response.data.daily[0].wind_speed}mph`,
                         inline: true,
                     },
                     {
-                        name: "Morning Temp",
+                        name: "🌡️Morning Temp",
                         value: `${response.data.daily[0].temp.morn}\u00B0F`,
                         inline: true,
                     },
                     {
-                        name: "Day Temp",
+                        name: "🌡️Day Temp",
                         value: `${response.data.daily[0].temp.day}\u00B0F`,
                         inline: true,
                     },
                     {
-                        name: "Night Temp",
+                        name: "🌡️Night Temp",
                         value: `${response.data.daily[0].temp.night}\u00B0F`,
                         inline: true,
                     },
                     {
-                        name: "Morning Feels Like",
+                        name: "🌅Morning Feels Like",
                         value: `${response.data.daily[0].feels_like.morn}\u00B0F`,
                         inline: true,
                     },
                     {
-                        name: "Day Feels Like",
+                        name: "☀️Day Feels Like",
                         value: `${response.data.daily[0].feels_like.day}\u00B0F`,
                         inline: true,
                     },
                     {
-                        name: "Night Feels Like",
+                        name: "🌃Night Feels Like",
                         value: `${response.data.daily[0].feels_like.night}\u00B0F`,
                         inline: true,
                     },
                     {
                         name: "---Current---",
-                        value: `Local time: ${forecastDate.toLocaleString(
+                        value: `🕒Local time: ${forecastDate.toLocaleString(
                             "en-US",
                             { timeZone: response.data.timezone }
                         )}`,
                     },
                     {
-                        name: "Temp",
+                        name: "🌡️Temp",
                         value: `${response.data.current.temp}\u00B0F`,
                         inline: true,
                     },
                     {
-                        name: "Feels Like",
+                        name: "🌡️Feels Like",
                         value: `${response.data.current.feels_like}\u00B0F`,
                         inline: true,
                     },
                     {
-                        name: "Description",
+                        name: "📖Description",
                         value: `${response.data.current.weather[0].main}, ${response.data.current.weather[0].description}`,
                         inline: true,
                     },
                     {
-                        name: "Visibility",
+                        name: "👀Visibility",
                         value: `${response.data.current.visibility} ft`,
                         inline: true,
                     },
                     {
-                        name: "Wind",
+                        name: "💨Wind",
                         value: `${Compass.cardinalFromDegree(
                             response.data.current.wind_deg
                         )}@${response.data.current.wind_speed}mph`,
                         inline: true,
                     },
                     {
-                        name: "Cloud Coverage",
+                        name: "☁️Cloud Coverage",
                         value: `${response.data.current.clouds}%`,
                         inline: true,
                     },
                     {
-                        name: "UV Index",
+                        name: "🌞UV Index",
                         value: `${response.data.current.uvi}`,
                         inline: true,
                     },
                     {
-                        name: "Humidity",
+                        name: "💦Humidity",
                         value: `${response.data.current.humidity}%`,
                         inline: true,
                     },
                     {
-                        name: "Dew Point",
+                        name: "💧Dew Point",
                         value: `${response.data.current.dew_point}\u00B0F`,
                         inline: true,
                     }
