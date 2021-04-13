@@ -30,9 +30,7 @@ module.exports = {
                 )
                 .setURL("https://openweathermap.org")
                 .setDescription(`3 forcast for ${args.join(" ")}`)
-                .setThumbnail
-                //`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-                ()
+                .setThumbnail(`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
                 .setTimestamp()
                 .setFooter("weather data provided by openweathermap");
 
