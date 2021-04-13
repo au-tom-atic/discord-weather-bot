@@ -37,7 +37,7 @@ module.exports = {
                 .setURL("https://openweathermap.org")
                 .setDescription(`Description for ${args.join(" ")}`)
                 .setThumbnail(
-                    `http://openweathermap.org/img/wn/${response.data.daily[0].weather[0].icon}@2x.png`
+                    `http://openweathermap.org/img/wn/${response.data.daily[0].weather[0].icon}.png`
                 )
                 .addFields(
                     {
@@ -46,7 +46,7 @@ module.exports = {
                     },
                     {
                         name: "🌧️Chance of Rain",
-                        value: `${response.data.daily[0].pop}%`,
+                        value: `${response.data.daily[0].pop * 100}%`,
                         inline: true,
                     },
                     {
