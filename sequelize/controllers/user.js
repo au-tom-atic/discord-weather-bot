@@ -18,7 +18,7 @@ async function findUser(user_id) {
 async function updateOrCreate(user_id, newItem) {
     // First try to find the record
     const foundItem = await models.user
-        .findOne({ user_id: user_id })
+        .findOne({ where:{user_id: user_id }})
         .then()
         .catch((e) => {
             console.log(e);
