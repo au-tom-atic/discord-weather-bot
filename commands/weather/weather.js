@@ -9,8 +9,7 @@ dotenv.config();
 async function findUser (model, where) {
     // First try to find the record
    const foundUser = await model.findOne({where});
-   if (!foundUser) {
-        // Item not found, create a new one
+   if (foundUser) {
         return  {found: true, foundUser};
     } else {
         return {found: false}
