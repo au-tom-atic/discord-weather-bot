@@ -2,6 +2,7 @@ const fs = require("fs");
 const Discord = require("discord.js");
 const dotenv = require("dotenv");
 const { prefix } = require("./config.json");
+const sequelize = require('./sequelize');
 const client = new Discord.Client();
 
 client.commands = new Discord.Collection();
@@ -21,7 +22,14 @@ for (const folder of commandFolders) {
     }
 }
 
-client.once("ready", () => {
+client.once("ready", async () => {
+    try {
+        sequelize.sync();
+        console.log('Database connected!');
+    } catch (error) {
+        console.log(error.message);
+        process.exit(1);
+    }
     console.log("ready for commands with prefix " + prefix);
 });
 

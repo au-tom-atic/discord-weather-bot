@@ -26,6 +26,7 @@ module.exports = {
         if (response) {
             let timestamp = response.data.current.dt;
             let forecastDate = new Date(timestamp * 1000);
+            console.log(response.data.current.visibility);
             const weatherEmbeddedResponse = new Discord.MessageEmbed()
                 .setColor("#0099ff")
                 .setTitle(`Current Weather`)

@@ -25,7 +25,9 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.2"
   },
   "engines": {
     "node": "12.x",
