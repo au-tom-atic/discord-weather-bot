@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
 		},
         placeName: {
             allowNull: true,
-            type: DataTypes.VARCHAR(255)
+            type: DataTypes.STRING
         },
         lat:
         {
