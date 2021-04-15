@@ -1,34 +1,31 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 // We export a function that defines the model.
 // This function will automatically receive as parameter the Sequelize connection object.
 module.exports = (sequelize) => {
-	sequelize.define('user', {
-		user_id: {
-			allowNull: false,
-			autoIncrement: false,
-			primaryKey: true,
-			type: DataTypes.STRING
-		},
+    sequelize.define("user", {
+        user_id: {
+            allowNull: false,
+            autoIncrement: false,
+            primaryKey: true,
+            type: DataTypes.STRING,
+        },
         placeName: {
             allowNull: true,
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
-        lat:
-        {
+        lat: {
             allowNull: true,
-            type: DataTypes.FLOAT
+            type: DataTypes.FLOAT,
         },
-        lng:
-        {
+        lng: {
             allowNull: true,
-            type: DataTypes.FLOAT
+            type: DataTypes.FLOAT,
         },
-        units:
-        {
+        units: {
             allowNull: true,
             type: DataTypes.STRING,
-            defaultValue: "imperial"
-        }
-	});
+            defaultValue: "imperial",
+        },
+    });
 };
