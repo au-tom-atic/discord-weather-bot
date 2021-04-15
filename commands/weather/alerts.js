@@ -2,7 +2,6 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 const Discord = require("discord.js");
 const geocoding = require("../../helpers/geocoding");
-const { models } = require('../../sequelize');
 const userQuery = require('../../sequelize/controllers/user.js')
 dotenv.config();
 
@@ -37,7 +36,7 @@ module.exports = {
         }else{
             console.log('user entered location argument');
             try {
-                locationData = await geocoder.getCoords(args.join(" "));
+                locationData = await geocoding.getCoords(args.join(" "));
             } catch (error) {
                 console.log(error);
             }

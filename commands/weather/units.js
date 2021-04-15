@@ -1,8 +1,6 @@
 const axios = require("axios");
-const { models } = require('../../sequelize');
 const dotenv = require("dotenv");
 const Discord = require("discord.js");
-const geocoding = require("../../helpers/geocoding");
 const userQuery = require('../../sequelize/controllers/user.js')
 dotenv.config();
 
