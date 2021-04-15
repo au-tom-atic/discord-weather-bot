@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const Discord = require("discord.js");
 const geocoding = require("../../helpers/geocoding");
 const Compass = require("cardinal-direction");
+const { models } = require('../../sequelize');
 dotenv.config();
 
 module.exports = {
@@ -10,11 +11,40 @@ module.exports = {
     aliases: ["m", "small", "mobile", "ub3r", "compact"],
     description: "gives you a 3 day forecast",
     cooldown: 5,
-    args: true,
     async execute(message, args) {
-        let coords = await geocoding.getCoords(args.join(" "));
+        let locationData;
+        if(!args.length)
+        {
+            console.log('user did not enter location argument');
+            const {found, foundUser} = await findUser( models.user, { user_id: message.author.id });
+            if(found)
+            {
+                locationData = {
+                    placeName: foundUser.dataValues.placeName,
+                    coords: {
+                        lng: foundUser.dataValues.lng,
+                        lat: foundUser.dataValues.lat
+                    }
+                }
+                console.log(foundUser)
+            }
+            else
+            {
+                message.reply(`please enter a location or save one with the -location command`);
+                return;
+            }
+
+        }else{
+            console.log('user entered location argument');
+            try {
+                locationData = await geocoder.getCoords(args.join(" "));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         let apiKey = process.env.WEATHER_KEY;
-        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lng}&appid=${apiKey}&units=imperial&exclude=minutely,hourly,alerts`;
+        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${locationData.coords.lat}&lon=${locationData.coords.lng}&appid=${apiKey}&units=imperial&exclude=minutely,hourly,alerts`;
 
         const response = await axios.get(url);
 
@@ -31,7 +61,7 @@ module.exports = {
                 .setThumbnail(
                     `http://openweathermap.org/img/wn/${response.data.current.weather[0].icon}.png`
                 )
-                .setDescription(`${args.join(" ")}: ${response.data.current.weather[0].description}`)
+                .setDescription(`${locationData.placeName}: ${response.data.current.weather[0].description}`)
                 .addFields(
                     {
                         name: `current`,
