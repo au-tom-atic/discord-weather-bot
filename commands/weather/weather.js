@@ -9,7 +9,7 @@ dotenv.config();
 async function findUser (model, where) {
     // First try to find the record
    const foundUser = await model.findOne({where});
-   if (!foundUesr) {
+   if (!foundUser) {
         // Item not found, create a new one
         return  {found: true, foundUser};
     } else {
@@ -34,6 +34,7 @@ module.exports = {
                     lng: foundUser.dataValues.lng,
                     lat: foundUser.dataValues.lat
                 }
+                console.log(foundUser)
             }
             else
             {
@@ -48,6 +49,9 @@ module.exports = {
                 console.log(error);
             }
         }
+
+        console.log(coords.lat);
+        console.log(coords.lng);
 
         let apiKey = process.env.WEATHER_KEY;
         let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lng}&appid=${apiKey}&units=imperial&exclude=minutely,hourly,alerts`;
