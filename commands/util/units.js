@@ -23,13 +23,13 @@ module.exports = {
         if(args[0] === 'imperial')
         {
             user = {
-                units: true
+                units: 'imperial'
             }
         }
 
         if(args[0] === 'metric'){
             user = {
-                units: false
+                units: 'metric'
             }
         }
 
