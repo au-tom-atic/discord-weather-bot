@@ -25,7 +25,7 @@ module.exports = {
     cooldown: 5,
     async execute(message, args) {
         let coords;
-        if(!args)
+        if(!args.length)
         {
             const {found, foundUser} = await findUser( models.user, { user_id: message.author.id });
             if(found)
