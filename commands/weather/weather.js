@@ -31,8 +31,8 @@ module.exports = {
             if(found)
             {
                 coords = {
-                    lng: foundUser.lng,
-                    lat: foundUser.lat
+                    lng: foundUser.dataValues.lng,
+                    lat: foundUser.dataValues.lat
                 }
             }
             else
