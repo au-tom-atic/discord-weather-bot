@@ -29,8 +29,6 @@ module.exports = {
                 units: "imperial",
             };
         } 
-        
-        console.log(userData);
 
         if (args.length) {
             locationData = await geocoding.getCoords(args.join(" ")).then().catch(e => {console.log(e)});
