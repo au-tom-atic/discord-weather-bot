@@ -25,7 +25,7 @@ async function getCoords(args) {
 
     let locationData = {
         placeName: placeName,
-        coords = data.results[0].geometry.location
+        coords: data.results[0].geometry.location
     }
 
     return locationData;
