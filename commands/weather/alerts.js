@@ -15,7 +15,7 @@ module.exports = {
         if(!args.length)
         {
             console.log('user did not enter location argument');
-            const {found, foundUser} = await findUser( models.user, { user_id: message.author.id });
+            const {found, foundUser} = await model.findUser( models.user, { user_id: message.author.id });
             if(found)
             {
                 locationData = {

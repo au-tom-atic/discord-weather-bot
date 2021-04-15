@@ -32,3 +32,13 @@ module.exports = (sequelize) => {
         }
 	});
 };
+
+module.exports.findUser = async (model, where) => {
+    // First try to find the record
+   const foundUser = await model.findOne({where});
+   if (foundUser) {
+        return  {found: true, foundUser};
+    } else {
+        return {found: false}
+    }
+}

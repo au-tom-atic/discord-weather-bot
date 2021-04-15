@@ -6,17 +6,6 @@ const Compass = require("cardinal-direction");
 const { models } = require('../../sequelize');
 dotenv.config();
 
-async function findUser (model, where) {
-    // First try to find the record
-   const foundUser = await model.findOne({where});
-   if (foundUser) {
-        return  {found: true, foundUser};
-    } else {
-        return {found: false}
-    }
-    
-}
-
 module.exports = {
     name: "weather",
     aliases: ["w"],
@@ -27,7 +16,7 @@ module.exports = {
         if(!args.length)
         {
             console.log('user did not enter location argument');
-            const {found, foundUser} = await findUser( models.user, { user_id: message.author.id });
+            const {found, foundUser} = await model.findUser( models.user, { user_id: message.author.id });
             if(found)
             {
                 locationData = {
