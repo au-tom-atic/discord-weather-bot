@@ -23,15 +23,18 @@ module.exports = {
     description: "gives you the weather, duh",
     cooldown: 5,
     async execute(message, args) {
-        let coords;
+        let locationData;
         if(!args.length)
         {
             const {found, foundUser} = await findUser( models.user, { user_id: message.author.id });
             if(found)
             {
-                coords = {
-                    lng: foundUser.dataValues.lng,
-                    lat: foundUser.dataValues.lat
+                locationData = {
+                    placeName: foundUser.dataValues.placeName,
+                    coords: {
+                        lng: foundUser.dataValues.lng,
+                        lat: foundUser.dataValues.lat
+                    }
                 }
                 console.log(foundUser)
             }
@@ -43,17 +46,14 @@ module.exports = {
 
         }else{
             try {
-                coords = await geocoder.getCoords(args.join(" "));
+                locationData = await geocoder.getCoords(args.join(" "));
             } catch (error) {
                 console.log(error);
             }
         }
 
-        console.log(coords.lat);
-        console.log(coords.lng);
-
         let apiKey = process.env.WEATHER_KEY;
-        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lng}&appid=${apiKey}&units=imperial&exclude=minutely,hourly,alerts`;
+        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${locationData.coords.lat}&lon=${locationData.coords.lng}&appid=${apiKey}&units=imperial&exclude=minutely,hourly,alerts`;
 
         const response = await axios.get(url);
         if (response) {
@@ -69,7 +69,7 @@ module.exports = {
                     "https://github.com/au-tom-atic/discord-weather-bot"
                 )
                 .setURL("https://openweathermap.org")
-                .setDescription(`Description for ${args.join(" ")}`)
+                .setDescription(`Weather for ${locationData.placeName}`)
                 .setThumbnail(
                     `http://openweathermap.org/img/wn/${response.data.daily[0].weather[0].icon}.png`
                 )

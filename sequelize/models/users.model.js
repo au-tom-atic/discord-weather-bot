@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
 			primaryKey: true,
 			type: DataTypes.STRING
 		},
+        placeName: {
+            allowNull: true,
+            type: DataTypes.VARCHAR(255)
+        },
         lat:
         {
             allowNull: true,
