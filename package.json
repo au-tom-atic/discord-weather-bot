@@ -22,12 +22,12 @@
     "cardinal-direction": "^1.1.1",
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
-    "request": "^2.88.2"
+    "pg": "^8.6.0",
+    "request": "^2.88.2",
+    "sequelize": "^6.6.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7",
-    "pg": "^8.6.0",
-    "sequelize": "^6.6.2"
+    "nodemon": "^2.0.7"
   },
   "engines": {
     "node": "12.x",
