@@ -27,20 +27,8 @@ module.exports = (sequelize) => {
         units:
         {
             allowNull: true,
-            type: DataTypes.BOOLEAN,
-            defaultValue: true
+            type: DataTypes.STRING,
+            defaultValue: "imperial"
         }
 	});
 };
-
-async function findUser (model, where) {
-    // First try to find the record
-   const foundUser = await model.findOne({where});
-   if (foundUser) {
-        return  {found: true, foundUser};
-    } else {
-        return {found: false}
-    }
-}
-
-module.exports = {findUser}

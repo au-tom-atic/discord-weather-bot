@@ -3,20 +3,8 @@ const { models } = require('../../sequelize');
 const dotenv = require("dotenv");
 const Discord = require("discord.js");
 const geocoding = require("../../helpers/geocoding");
+const userQuery = require('../../sequelize/controllers/user.js')
 dotenv.config();
-
-async function updateOrCreate (model, where, newItem) {
-    // First try to find the record
-   const foundItem = await model.findOne({where});
-   if (!foundItem) {
-        // Item not found, create a new one
-        const item = await model.create(newItem)
-        return  {item, created: true};
-    }
-    // Found an item, update it
-    const item = await model.update(newItem, {where});
-    return {item, created: false};
-}
 
 module.exports = {
     name: "location",
@@ -33,10 +21,16 @@ module.exports = {
             lat: locationData.coords.lat,
             lng: locationData.coords.lng
         }
-        const {item, created} = await updateOrCreate( models.user, { user_id: message.author.id }, user);
+        const {item, created} = await userQuery.updateOrCreate(message.author.id, user);
 
-        console.log(item);
-        console.log(created);
+        if(created)
+        {
+            message.reply(`Saved location ${item.placeName} for you`);
+        }
+        else
+        {
+            message.reply(`Updated saved location`);
+        }
 
     }
 };
