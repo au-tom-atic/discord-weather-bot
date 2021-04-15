@@ -20,11 +20,8 @@ async function getCoords(args) {
         throw error;
     }
 
-    let placeName = data.results[0].address_components[2].short_name + ', ' + data.results[0].address_components[4].short_name + ', '
-                    + data.results[0].address_components[5].short_name;
-
     let locationData = {
-        placeName: placeName,
+        placeName: data.results[0].formatted_address,
         coords: data.results[0].geometry.location
     }
 

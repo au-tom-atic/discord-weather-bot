@@ -26,11 +26,12 @@ module.exports = {
     args: true,
     async execute(message, args) {
         //get location
-        let coords = await geocoding.getCoords(args.join(" "));
+        let locationData = await geocoding.getCoords(args.join(" "));
         let user = {
             user_id: message.author.id,
-            lat: coords.lat,
-            lng: coords.lng
+            placeName: locationData.placeName,
+            lat: locationData.coords.lat,
+            lng: locationData.coords.lng
         }
         const {item, created} = await updateOrCreate( models.user, { user_id: message.author.id }, user);
 

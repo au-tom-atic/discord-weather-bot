@@ -26,6 +26,7 @@ module.exports = {
         let locationData;
         if(!args.length)
         {
+            console.log('user did not enter location argument');
             const {found, foundUser} = await findUser( models.user, { user_id: message.author.id });
             if(found)
             {
@@ -45,6 +46,7 @@ module.exports = {
             }
 
         }else{
+            console.log('user entered location argument');
             try {
                 locationData = await geocoder.getCoords(args.join(" "));
             } catch (error) {
