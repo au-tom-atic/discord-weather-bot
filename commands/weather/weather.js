@@ -3,20 +3,50 @@ const dotenv = require("dotenv");
 const Discord = require("discord.js");
 const geocoder = require("../../helpers/geocoding.js");
 const Compass = require("cardinal-direction");
+const { models } = require('../../sequelize');
 dotenv.config();
+
+async function findUser (model, where) {
+    // First try to find the record
+   const foundUser = await model.findOne({where});
+   if (!foundUesr) {
+        // Item not found, create a new one
+        return  {found: true, foundUser};
+    } else {
+        return {found: false}
+    }
+    
+}
 
 module.exports = {
     name: "weather",
     aliases: ["w"],
     description: "gives you the weather, duh",
     cooldown: 5,
-    args: true,
     async execute(message, args) {
         let coords;
-        try {
-            coords = await geocoder.getCoords(args.join(" "));
-        } catch (error) {
-            console.log(error);
+        if(!args)
+        {
+            const {found, foundUser} = await findUser( models.user, { user_id: message.author.id });
+            if(found)
+            {
+                coords = {
+                    lng: foundUser.lng,
+                    lat: foundUser.lat
+                }
+            }
+            else
+            {
+                message.reply(`please enter a location or save one with the -location command`);
+                return;
+            }
+
+        }else{
+            try {
+                coords = await geocoder.getCoords(args.join(" "));
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         let apiKey = process.env.WEATHER_KEY;
