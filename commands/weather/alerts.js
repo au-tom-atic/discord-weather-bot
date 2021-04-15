@@ -11,39 +11,33 @@ module.exports = {
     description: "gives you a 3 day forecast",
     cooldown: 5,
     async execute(message, args) {
-        let locationData;
-        if(!args.length)
-        {
-            console.log('user did not enter location argument');
-            const {found, foundUser} = await userQuery.findUser(message.author.id);
-            if(found)
-            {
-                locationData = {
-                    placeName: foundUser.dataValues.placeName,
-                    coords: {
-                        lng: foundUser.dataValues.lng,
-                        lat: foundUser.dataValues.lat
-                    }
-                }
-                console.log(foundUser)
-            }
-            else
-            {
-                message.reply(`please enter a location or save one with the -location command`);
-                return;
-            }
+        let { found, userData } = await userQuery.findUser(message.author.id);
 
-        }else{
-            console.log('user entered location argument');
-            try {
-                locationData = await geocoding.getCoords(args.join(" "));
-            } catch (error) {
-                console.log(error);
-            }
+        if (!found && !args.length) {
+            message.reply(
+                "Please provide a location or save your location using -location"
+            );
+            return;
+        }
+
+        if (!found) {
+            userData = {
+                lat: null,
+                lng: null,
+                placeName: null,
+                units: "imperial",
+            };
+        }
+
+        if (args.length) {
+            locationData = await geocoding.getCoords(args.join(" "));
+            userData.lng = locationData.coords.lng;
+            userData.lat = locationData.coords.lat;
+            userData.placeName = locationData.placeName;
         }
 
         let apiKey = process.env.WEATHER_KEY;
-        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${locationData.coords.lat}&lon=${locationData.coords.lng}&appid=${apiKey}&units=imperial&exclude=minutely,hourly,daily`;
+        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${userData.lat}&lon=${userData.lng}&appid=${apiKey}&units=${userData.units}&exclude=minutely,hourly,daily`;
 
         const response = await axios.get(url);
 
@@ -61,7 +55,7 @@ module.exports = {
                     .setThumbnail(
                         `http://openweathermap.org/img/wn/${response.data.current.weather[0].icon}@2x.png`
                     )
-                    .setDescription(`Alert from ${alert.sender_name} for ${locationData.placeName}`)
+                    .setDescription(`Alert from ${alert.sender_name} for ${userData.placeName}`)
                     .addFields(
                         {
                             name: `❗Event`,
