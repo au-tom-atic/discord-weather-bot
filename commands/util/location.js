@@ -14,14 +14,14 @@ module.exports = {
     args: true,
     async execute(message, args) {
         //get location
-        let locationData = await geocoding.getCoords(args.join(" "));
+        let locationData = await geocoding.getCoords(args.join(" ")).catch(e => {console.log(e)});
         let user = {
             user_id: message.author.id,
             placeName: locationData.placeName,
             lat: locationData.coords.lat,
             lng: locationData.coords.lng
         }
-        const {item, created} = await userQuery.updateOrCreate(message.author.id, user);
+        const {item, created} = await userQuery.updateOrCreate(message.author.id, user).catch(e => {console.log(e)});
 
         if(created)
         {

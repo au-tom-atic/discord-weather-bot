@@ -11,7 +11,7 @@ module.exports = {
     description: "gives you a 3 day forecast",
     cooldown: 5,
     async execute(message, args) {
-        let { found, userData } = await userQuery.findUser(message.author.id);
+        let { found, userData } = await userQuery.findUser(message.author.id).catch(e => {console.log(e)});
 
         if (!found && !args.length) {
             message.reply(
@@ -30,7 +30,7 @@ module.exports = {
         }
 
         if (args.length) {
-            locationData = await geocoding.getCoords(args.join(" "));
+            locationData = await geocoding.getCoords(args.join(" ")).catch(e => {console.log(e)});
             userData.lng = locationData.coords.lng;
             userData.lat = locationData.coords.lat;
             userData.placeName = locationData.placeName;
@@ -39,7 +39,7 @@ module.exports = {
         let apiKey = process.env.WEATHER_KEY;
         let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${userData.lat}&lon=${userData.lng}&appid=${apiKey}&units=${userData.units}&exclude=minutely,hourly,daily`;
 
-        const response = await axios.get(url);
+        const response = await axios.get(url).catch(e => {console.log(e)});
 
         if (response && response.data.alerts) {
             for (const [index, alert] of response.data.alerts.entries()) {
