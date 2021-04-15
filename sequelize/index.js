@@ -4,7 +4,10 @@ dotenv.config();
 
 const sequelize = new Sequelize(process.env.DATBASE, process.env.DB_USER , process.env.DB_PW, {
     host: process.env.DB_HOST,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    dialectOptions: {
+        "ssl": true
+      }
 });
 
 const modelDefiners = [
