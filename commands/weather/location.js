@@ -32,8 +32,10 @@ module.exports = {
             lat: coords.lat,
             lng: coords.lng
         }
+        const {item, created} = await updateOrCreate( models.user, { user_id: message.author.id }, user);
 
-        const {item, created} = await updateOrCreate( models.user, message.author.id, user);
-        
+        console.log(item);
+        console.log(created);
+
     }
 };
