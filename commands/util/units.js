@@ -33,7 +33,7 @@ module.exports = {
             }
         }
 
-        const {item, created} = await userQuery.updateOrCreate(message.author.id, user).catch(e => {console.log(e)});
+        const {item, created} = await userQuery.updateOrCreate(message.author.id, user).then().catch(e => {console.log(e)});
 
         if(created)
         {
