@@ -21,12 +21,14 @@ module.exports = {
 
         if (args[0] === "imperial") {
             user = {
+                user_id: message.author.id,
                 units: "imperial",
             };
         }
 
         if (args[0] === "metric") {
             user = {
+                user_id: message.author.id,
                 units: "metric",
             };
         }
