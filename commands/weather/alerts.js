@@ -18,6 +18,13 @@ module.exports = {
                 console.log(e);
             });
 
+        if(found) {
+            if(!userData.lng && !userData.lat && !userData.placeName)
+                {
+                    message.reply('Please provide a location or save your location using -location');
+                }
+        }      
+
         if (!found && !args.length) {
             message.reply(
                 "Please provide a location or save your location using -location"

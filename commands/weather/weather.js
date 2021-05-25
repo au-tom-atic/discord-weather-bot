@@ -26,6 +26,13 @@ module.exports = {
             return;
         }
 
+        if(found){
+            if(!userData.lng && !userData.lat && !userData.placeName)
+            {
+                message.reply('Please provide a location or save your location using -location');
+            }
+        }
+
         if (!found) {
             userData = {
                 lat: null,
