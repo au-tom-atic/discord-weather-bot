@@ -57,7 +57,7 @@ module.exports = {
 
         if (userData.units == "metric") {
             degreesUnits = "C";
-            velocityUnits = "km/h";
+            velocityUnits = "m/s";
             distanceUnits = "km";
         }
 
