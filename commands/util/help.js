@@ -17,6 +17,9 @@ module.exports = {
         .setDescription(
             `Description of my commands. \n[LOCATION] is optional if a location is stored for your account`
         )
+        .setThumbnail(
+            `https://hotemoji.com/images/emoji/x/1nytysx1j5ajx.png`
+        )
         .addFields(
             {
                 name: '`weather w minimal m [LOCATION]`',
