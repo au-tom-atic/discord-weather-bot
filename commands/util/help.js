@@ -7,16 +7,13 @@ module.exports = {
     execute(message) {
         let helpEmbeddedMsg = new Discord.MessageEmbed()
         .setColor("#0099ff")
-        .setTitle(`Weather Forecast`)
+        .setTitle(`Help`)
         .setAuthor(
             `Help Message`,
             "https://static.thenounproject.com/png/967229-200.png",
             "https://github.com/au-tom-atic/discord-weather-bot"
         )
         .setURL("https://openweathermap.org")
-        .setThumbnail(
-            `http://openweathermap.org/img/wn/${response.data.current.weather[0].icon}.png`
-        )
         .setDescription(
             `Description of my commands. All commands must follow a --. [LOCATION] is optional if a location is stored for your account`
         )

@@ -67,7 +67,7 @@ module.exports = {
             for (const [index, alert] of response.data.alerts.entries()) {
                 let weatherEmbeddedResponse = new Discord.MessageEmbed()
                     .setColor("#0099ff")
-                    .setTitle(`Weather Forecast`)
+                    .setTitle(`Weather Advisories`)
                     .setAuthor(
                         `${userData.placeName}❗`,
                         "https://static.thenounproject.com/png/967229-200.png",
