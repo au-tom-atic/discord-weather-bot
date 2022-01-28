@@ -10,7 +10,7 @@ module.exports = {
         .setTitle(`Help`)
         .setAuthor(
             `Help Message`,
-            "❓",
+            "https://hotemoji.com/images/emoji/x/1nytysx1j5ajx.png",
             "https://github.com/au-tom-atic/discord-weather-bot"
         )
         .setURL("https://openweathermap.org")
