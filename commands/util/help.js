@@ -15,7 +15,7 @@ module.exports = {
         )
         .setURL("https://openweathermap.org")
         .setDescription(
-            `Description of my commands. All commands must follow a --. [LOCATION] is optional if a location is stored for your account`
+            `Description of my commands. [LOCATION] is optional if a location is stored for your account`
         )
         .addFields(
             {
