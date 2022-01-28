@@ -84,12 +84,12 @@ module.exports = {
                     .setColor("#0099ff")
                     .setTitle(`Weather Forecast`)
                     .setAuthor(
-                        "Tom L",
+                        `${userData.placeName}`,
                         "https://static.thenounproject.com/png/967229-200.png",
                         "https://github.com/au-tom-atic/discord-weather-bot"
                     )
                     .setURL("https://openweathermap.org")
-                    .setDescription(`3 forecast for ${userData.placeName}`)
+                    .setDescription(`${day.weather[0].description}`)
                     .setThumbnail(
                         `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`
                     )
@@ -106,8 +106,8 @@ module.exports = {
 
                 weatherEmbeddedResponse.addFields(
                     {
-                        name: `---${month}/${date}/${year}---`,
-                        value: `${day.weather[0].description}`,
+                        name: `---Date---`,
+                        value: `${month}/${date}/${year}`,
                     },
                     {
                         name: `Min Temp`,

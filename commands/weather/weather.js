@@ -7,9 +7,9 @@ const userQuery = require("../../sequelize/controllers/user.js");
 dotenv.config();
 
 module.exports = {
-    name: "weather",
-    aliases: ["w"],
-    description: "gives you the weather, duh",
+    name: "detailed",
+    aliases: ["d", "dw"],
+    description: "gives you detailed weather, duh",
     cooldown: 5,
     async execute(message, args) {
         let { found, userData } = await userQuery
@@ -84,20 +84,16 @@ module.exports = {
                 .setColor("#0099ff")
                 .setTitle(`Current Weather`)
                 .setAuthor(
-                    "Tom L",
+                    `${userData.placeName}`,
                     "https://static.thenounproject.com/png/967229-200.png",
                     "https://github.com/au-tom-atic/discord-weather-bot"
                 )
                 .setURL("https://openweathermap.org")
-                .setDescription(`Weather for ${userData.placeName}`)
+                .setDescription(`${response.data.daily[0].weather[0].description}`)
                 .setThumbnail(
                     `http://openweathermap.org/img/wn/${response.data.daily[0].weather[0].icon}.png`
                 )
                 .addFields(
-                    {
-                        name: "---Daily Forecast---",
-                        value: `${response.data.daily[0].weather[0].description}`,
-                    },
                     {
                         name: "🌧️Chance of Rain",
                         value: `${response.data.daily[0].pop * 100}%`,

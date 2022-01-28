@@ -69,7 +69,7 @@ module.exports = {
                     .setColor("#0099ff")
                     .setTitle(`Weather Forecast`)
                     .setAuthor(
-                        "Tom L",
+                        `${userData.placeName}❗`,
                         "https://static.thenounproject.com/png/967229-200.png",
                         "https://github.com/au-tom-atic/discord-weather-bot"
                     )
@@ -78,14 +78,9 @@ module.exports = {
                         `http://openweathermap.org/img/wn/${response.data.current.weather[0].icon}@2x.png`
                     )
                     .setDescription(
-                        `Alert from ${alert.sender_name} for ${userData.placeName}`
+                        `${alert.event} alert sent by ${alert.sender_name}`
                     )
                     .addFields(
-                        {
-                            name: `❗Event`,
-                            value: `${alert.event}`,
-                            inline: true,
-                        },
                         {
                             name: "⏲️Start",
                             value: `${new Date(
