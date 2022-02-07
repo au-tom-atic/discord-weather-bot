@@ -2,7 +2,7 @@ const axios = require("axios");
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "old",
+    name: "minimal",
     aliases: ["m", "minimal"],
     description: "deprecated commands",
     cooldown: 5,
