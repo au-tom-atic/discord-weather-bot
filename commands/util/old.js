@@ -9,11 +9,10 @@ dotenv.config();
 module.exports = {
     name: "old",
     aliases: ["m", "minimal"],
-    description: "gives you the weather in a precise format",
+    description: "deprecated commands",
     cooldown: 5,
     async execute(message, args) {
-        const user = message.author;
-        message.reply(`Did you mean '-w', <@${user.id}>?`);
+        message.reply(`Did you mean '-w'?`);
         return;
     },
 };
