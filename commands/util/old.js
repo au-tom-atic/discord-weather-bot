@@ -1,10 +1,5 @@
 const axios = require("axios");
-const dotenv = require("dotenv");
 const Discord = require("discord.js");
-const geocoding = require("../../helpers/geocoding");
-const Compass = require("cardinal-direction");
-const userQuery = require("../../sequelize/controllers/user.js");
-dotenv.config();
 
 module.exports = {
     name: "old",
