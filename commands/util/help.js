@@ -22,7 +22,7 @@ module.exports = {
         )
         .addFields(
             {
-                name: '`weather w minimal m {PLACE}`',
+                name: '`weather w {PLACE}`',
                 value: `*Provides a concise weather report for {PLACE}*`,
             },
             {
