@@ -13,13 +13,6 @@ module.exports = {
     cooldown: 5,
     async execute(message, args) {
 
-        //phasing out -m
-        if (args[0] == "m" || args[0] == "minimal") {
-            const user = message.author;
-            message.reply(`Did you mean '-w', <@${user.id}>?`);
-            return;
-        }
-
         let { found, userData } = await userQuery
             .findUser(message.author.id)
             .then()
