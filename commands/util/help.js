@@ -15,7 +15,7 @@ module.exports = {
         )
         .setURL("https://openweathermap.org")
         .setDescription(
-            `Description of my commands. \n{PLACE} is optional if a location is stored for your account`
+            `Description of my commands. \n*{PLACE} is optional if a location is stored for your account*`
         )
         .setThumbnail(
             `https://hotemoji.com/images/emoji/x/1nytysx1j5ajx.png`
