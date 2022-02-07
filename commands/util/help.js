@@ -15,35 +15,35 @@ module.exports = {
         )
         .setURL("https://openweathermap.org")
         .setDescription(
-            `Description of my commands. \n[LOCATION] is optional if a location is stored for your account`
+            `Description of my commands. \n{PLACE} is optional if a location is stored for your account`
         )
         .setThumbnail(
             `https://hotemoji.com/images/emoji/x/1nytysx1j5ajx.png`
         )
         .addFields(
             {
-                name: '`weather w minimal m [LOCATION]`',
-                value: `*Provides a concise weather report for [LOCATION]*`,
+                name: '`weather w minimal m {PLACE}`',
+                value: `*Provides a concise weather report for {PLACE}*`,
             },
             {
-                name: '`forecast f [LOCATION]`',
-                value: `*Provides a 3 day forecast for [LOCATION]*`,
+                name: '`forecast f {PLACE}`',
+                value: `*Provides a 3 day forecast for {PLACE}*`,
             },
             {
-                name: '`detailed d dw [LOCATION]`',
-                value: `*Provides a detailed weather report for [LOCATION]*`,
+                name: '`detailed d dw {PLACE}`',
+                value: `*Provides a detailed weather report for {PLACE}*`,
             },
             {
-                name: '`alert advisory a [LOCATION]`',
-                value: `*Provides weather alerts for [LOCATION]*`,
+                name: '`alert advisory a {PLACE}`',
+                value: `*Provides weather alerts for {PLACE}*`,
             },
             {
                 name: '`units u [imperial | metric]`',
                 value: `*Save preferences for metric or imperial*`,
             },
             {
-                name: '`location l [LOCATION]`',
-                value: `*Remember this [LOCATION] for weather, detailed weather, and alert commands*`,
+                name: '`location l {PLACE}`',
+                value: `*Remember this {PLACE} for weather, detailed weather, and alert commands*`,
             },
             {
                 name: '`help h`',

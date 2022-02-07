@@ -8,7 +8,7 @@ dotenv.config();
 
 module.exports = {
     name: "detailed",
-    aliases: ["d", "dw"],
+    aliases: ["d", "dw", "detail"],
     description: "gives you detailed weather, duh",
     cooldown: 5,
     async execute(message, args) {
