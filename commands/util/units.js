@@ -11,7 +11,6 @@ module.exports = {
     cooldown: 15,
     args: true,
     async execute(message, args) {
-        console.log(args[0]);
         if (args[0] != "imperial" && args[0] != "metric") {
             message.reply(`please enter 'imperial' or 'metric'`);
             return;
