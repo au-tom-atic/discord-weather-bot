@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     name: "CtoF",
-    aliases: ["c2f", "fahrenheit"],
+    aliases: ["c2f", "cf", ,"ctof", "fahrenheit"],
     description: "Converts a temperature from C to F, or F to C",
     cooldown: 15,
     args: true,
