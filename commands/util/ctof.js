@@ -12,7 +12,7 @@ module.exports = {
         const celsisus = args[0].replace(/[^-?\d*\.?\d+$]/g, '');
         console.log(`stripped input: ${celsisus}`)
 
-        const fahrenheit = ((celsisus * (9 / 5)) + 32).toFixed(3);
+        const fahrenheit = +((celsisus * (9 / 5)) + 32).toFixed(2);
 
         console.log(`result: ${fahrenheit}`);
 
