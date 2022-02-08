@@ -46,6 +46,14 @@ module.exports = {
                 value: `*Remember this {PLACE} for weather, detailed weather, and alert commands*`,
             },
             {
+                name: '`ctof cf {TEMP}`',
+                value: `*Converts the given celsius temp to fahrenheit*`,
+            },
+            {
+                name: '`ftoc fc {TEMP}`',
+                value: `*Converts the given fahrenheit temp to celsius*`,
+            },
+            {
                 name: '`help h`',
                 value: `*betterhelp.com/zeroweather for 10% off your first month*`,
             }
