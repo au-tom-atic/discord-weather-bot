@@ -8,9 +8,13 @@ module.exports = {
     cooldown: 3,
     args: true,
     async execute(message, args) {
-        const celsisus = args[0].replace(/[^\d-]/g, '');
+        console.log(`original input: ${args[0]}`)
+        const celsisus = args[0].replace(/[^-?\d*\.?\d+$]/g, '');
+        console.log(`stripped input: ${celsisus}`)
 
-        const fahrenheit = (celsisus * (9 / 5)) + 32
+        const fahrenheit = (celsisus * (9 / 5)) + 32;
+
+        console.log(`result: ${fahrenheit}`);
 
         message.channel.send(`${fahrenheit}°F`);
     },
