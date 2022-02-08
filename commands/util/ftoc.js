@@ -9,7 +9,7 @@ module.exports = {
     args: true,
     async execute(message, args) {
         console.log(`original input: ${args[0]}`)
-        const fahrenheit = args[0].replace(/[^^-?\d*\.?\d+$]/g, '');
+        const fahrenheit = args[0].replace(/[^-?\d*\.?\d+$]/g, '');
         console.log(`stripped input: ${fahrenheit}`)
 
         const celsisus = (fahrenheit - 32) * (5 / 9);
