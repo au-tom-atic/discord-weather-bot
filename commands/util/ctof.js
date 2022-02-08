@@ -18,6 +18,6 @@ module.exports = {
 
         //console.log(`result: ${fahrenheit}`);
 
-        message.channel.send(`${fahrenheit}°F`);
+        message.channel.send(`${celsisus}°C = ${fahrenheit}°F`);
     },
 };
