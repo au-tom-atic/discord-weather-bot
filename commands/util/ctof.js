@@ -5,12 +5,12 @@ module.exports = {
     name: "CtoF",
     aliases: ["c2f", "cf", ,"ctof", "fahrenheit"],
     description: "Converts a temperature from C to F, or F to C",
-    cooldown: 15,
+    cooldown: 3,
     args: true,
     async execute(message, args) {
-        const celsisus = args[0]
+        const celsisus = args[0].replace(/[^\d-]/g, '');
 
-        const fahrenheit = (celsisus * 1.8) + 32
+        const fahrenheit = (celsisus * (9 / 5)) + 32
 
         message.channel.send(`${fahrenheit}°F`);
     },
