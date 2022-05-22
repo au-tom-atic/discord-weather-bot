@@ -3,10 +3,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const sequelize = new Sequelize(
-    process.env.DATBASE,
-    process.env.DB_USER,
-    process.env.DB_PW,
-    {
+    uri=process.env.DB_URI,
+    options={
         host: process.env.DB_HOST,
         dialect: "postgres",
         dialectOptions: {
